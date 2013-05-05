@@ -6,24 +6,24 @@ import input.Data;
 
 using StringTools;
 
-class Reader 
+class Reader
 {
 	var i : Input;
 	var lineNum : Int;
 	var cmd : CommandLine;
-	
-	public function new(i) 
+
+	public function new(i)
 	{
 		this.i = i;
 		this.lineNum = 0;
 	}
-	
+
 	private function readLine()
 	{
 		lineNum++;
 		return i.readLine();
 	}
-	
+
 	private function readSection(name:String, ret:Data)
 	{
 		var i = i;
@@ -35,12 +35,12 @@ class Reader
 				var section = line.substr(4).trim();
 				if (section != name)
 					throw UnmatchedSection(section, name, lineNum);
-				
+
 				return null;
 			}
 			return line;
 		}
-		
+
 		switch(name)
 		{
 		case "defines":
@@ -63,7 +63,7 @@ class Reader
 				{
 					if (lastPath != null && lastArr.length > 0)
 						ret.modules.push( { path: lastPath, types:lastArr } );
-					
+
 					lastPath = line.substr(2);
 					lastArr = [];
 				} else if (line.startsWith("C ")) {
@@ -90,19 +90,19 @@ class Reader
 			while (line != null) line = getLine();
 		}
 	}
-	
+
 	public function read():Data
 	{
 		var ret =
 		{
 			baseDir: null,
-			defines: new Hash(),
+			defines: new Map(),
 			modules: [],
 			main: null,
 			resources: [],
 			libs: []
 		};
-		
+
 		var i = i;
 		try
 		{
@@ -117,14 +117,14 @@ class Reader
 				}
 			}
 		}
-		
+
 		catch (e:Eof)
 		{
-			
+
 		}
-		
+
 		//some versions may still contain the bug that adds multiple times the same module
-		var unique = new Hash();
+		var unique = new Map();
 		var newMods = [];
 		for (r in ret.modules)
 		{
@@ -135,8 +135,8 @@ class Reader
 			}
 		}
 		ret.modules = newMods;
-		
+
 		return ret;
 	}
-	
+
 }
