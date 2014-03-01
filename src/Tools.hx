@@ -2,13 +2,26 @@ package ;
 import sys.FileSystem;
 import sys.io.File;
 
-class Tools 
+class Tools
 {
 	public static function copy(from:String, to:String)
 	{
 		File.saveBytes(to, File.getBytes(from));
 	}
-	
+
+	public static function copyIfNewer(from:String, to:String)
+	{
+		if (!FileSystem.exists(to))
+		{
+			copy(from,to);
+		} else {
+			var sfrom = FileSystem.stat(from),
+			    sto = FileSystem.stat(to);
+			if (sfrom.mtime.getTime() > sto.mtime.getTime())
+				copy(from,to);
+		}
+	}
+
 	public static function copyTree(from:String, to:String)
 	{
 		if (FileSystem.isDirectory(from))
@@ -17,7 +30,7 @@ class Tools
 			{
 				FileSystem.createDirectory(to);
 			}
-			
+
 			var path = from + "/";
 			var pathto = to + "/";
 			for (file in FileSystem.readDirectory(from))
@@ -33,10 +46,10 @@ class Tools
 		} else {
 			copy(from, to);
 		}
-		
-		
+
+
 	}
-	
+
 	public static function addPath(basePath:String, path:String)
 	{
 		//see if path is absolute
@@ -44,13 +57,13 @@ class Tools
 			return basePath;
 		else if (basePath.length == 0)
 			basePath = ".";
-		
+
 		switch(path.charCodeAt(0))
 		{
-		case 
-			'/'.code, //unix absolute 
+		case
+			'/'.code, //unix absolute
 			'\\'.code: //windows newtork absolute
-				
+
 				return path;
 		default:
 			if (path.charCodeAt(1) == ':'.code) //windows absolute
