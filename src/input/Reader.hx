@@ -49,6 +49,15 @@ class Reader
 			{
 				ret.defines.set(line.rtrim(), true);
 			}
+		case "defines_data":
+			var line;
+			while ( (line = getLine()) != null)
+			{
+		    var index = line.indexOf("=");
+		    var key = line.substring(0, index).rtrim();
+		    var value = line.substring(index + 1, line.length).ltrim();
+		    ret.definesData.set(key, value);
+			}
 		case "libs":
 			var line;
 			while ( (line = getLine()) != null)
@@ -97,6 +106,7 @@ class Reader
 		{
 			baseDir: null,
 			defines: new Map(),
+			definesData: new Map(),
 			modules: [],
 			main: null,
 			resources: [],
