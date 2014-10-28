@@ -53,10 +53,10 @@ class Reader
 			var line;
 			while ( (line = getLine()) != null)
 			{
-		    var index = line.indexOf("=");
-		    var key = line.substring(0, index).rtrim();
-		    var value = line.substring(index + 1, line.length).ltrim();
-		    ret.definesData.set(key, value);
+				var index = line.indexOf("=");
+				var key = line.substring(0, index).rtrim();
+				var value = line.substring(index + 1, line.length).ltrim();
+				ret.definesData.set(key, value);
 			}
 		case "libs":
 			var line;
