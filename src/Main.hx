@@ -23,8 +23,6 @@ class Main
 		{
 			//pre-process args:
 			var cmd = new CommandLine(name);
-			if (cmd.featureLevel > SUPPORTED_FEATURE_LEVEL)
-				throw Error.UnsupportedFeatureLevel(cmd.featureLevel,SUPPORTED_FEATURE_LEVEL);
 			var args = Sys.args();
 			var last = args[args.length - 1];
 
@@ -39,6 +37,8 @@ class Main
 			cmd.process(args);
 			if (cmd.target == null)
 				throw Error.NoTarget;
+			if (cmd.featureLevel > SUPPORTED_FEATURE_LEVEL)
+				throw Error.UnsupportedFeatureLevel(cmd.featureLevel,SUPPORTED_FEATURE_LEVEL);
 
 			//read input
 			if (!FileSystem.exists(target = cmd.target))
@@ -63,7 +63,7 @@ class Main
 			switch(e)
 			{
 			case UnsupportedFeatureLevel(given,expected):
-				println('You have an outdated version of the $name tool. Please update it by running `haxelib update $name` or if you\'re using a git build, update the tool to use its development directory. Unsupported feature level $given. This tool only supports up to feature level $expected');
+				println('You have an outdated version of the $name tool. Please update it by running `haxelib update $name` or if you\'re using a git build, update the tool to use its development directory.\nUnsupported feature level $given. This tool only supports up to feature level $expected');
 			case UnknownOption(name):
 				println("Unknown command-line option " + name);
 			case BadFormat(optionName, option):

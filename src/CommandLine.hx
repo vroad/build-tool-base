@@ -48,8 +48,8 @@ class CommandLine
 		return
 		' Usage : haxelib run '+ name +' buildFile.txt [?... options]\n' +
 		' Options :\n' +
-		'  --haxe-version <version> : sets what baseline haxe version was it compiled with\n';
-		'  --feature-level <level> : sets the feature level needed to compile the buildFile. Defaults to 0\n';
+		'  --haxe-version <version> : sets what baseline haxe version was it compiled with\n' +
+		'  --feature-level <level> : sets the feature level needed to compile the buildFile. Defaults to 0\n' +
 		'  --out <filename> : sets the output file path\n';
 	}
 
