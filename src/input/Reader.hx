@@ -96,8 +96,11 @@ class Reader
 			if (line != null)
 				throw Unexpected(line, lineNum);
 		case "opts":
-			var line = getLine();
-			while (line != null)
+			var line = null;
+			while ( (line = getLine()) != null )
+			{
+				ret.opts.push(line);
+			}
 		case unk:
 			var toolName = cmd.name;
 			Sys.stderr().writeString('WARNING: The option $unk was passed to the build tool and wasn\'t recognized. It is recommended that you update the $toolName tool\n');

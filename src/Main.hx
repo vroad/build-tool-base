@@ -24,7 +24,7 @@ class Main
 			//pre-process args:
 			var cmd = new CommandLine(name);
 			if (cmd.featureLevel > SUPPORTED_FEATURE_LEVEL)
-				throw UnsupportedFeatureLevel(cmd.featureLevel,SUPPORTED_FEATURE_LEVEL);
+				throw Error.UnsupportedFeatureLevel(cmd.featureLevel,SUPPORTED_FEATURE_LEVEL);
 			var args = Sys.args();
 			var last = args[args.length - 1];
 
@@ -111,9 +111,10 @@ class Main
 			Sys.exit(3);
 		}
 
-		private static function println(str:String)
-		{
-			Sys.stderr().writeString(str+'\n');
-		}
+	}
+
+	private static function println(str:String)
+	{
+		Sys.stderr().writeString(str+'\n');
 	}
 }
