@@ -15,4 +15,5 @@ typedef Data =
 	var main:Null<String>;
 	var resources:Array<String>;
 	var libs:Array<String>;
+	var opts:Array<String>;
 }

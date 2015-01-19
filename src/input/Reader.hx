@@ -12,10 +12,11 @@ class Reader
 	var lineNum : Int;
 	var cmd : CommandLine;
 
-	public function new(i)
+	public function new(cmd,i)
 	{
 		this.i = i;
 		this.lineNum = 0;
+		this.cmd = cmd;
 	}
 
 	private function readLine()
@@ -94,7 +95,12 @@ class Reader
 			var line = getLine();
 			if (line != null)
 				throw Unexpected(line, lineNum);
-		default:
+		case "opts":
+			var line = getLine();
+			while (line != null)
+		case unk:
+			var toolName = cmd.name;
+			Sys.stderr().writeString('WARNING: The option $unk was passed to the build tool and wasn\'t recognized. It is recommended that you update the $toolName tool\n');
 			var line = getLine();
 			while (line != null) line = getLine();
 		}
@@ -110,7 +116,8 @@ class Reader
 			modules: [],
 			main: null,
 			resources: [],
-			libs: []
+			libs: [],
+			opts: []
 		};
 
 		var i = i;
