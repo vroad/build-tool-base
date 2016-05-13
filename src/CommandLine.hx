@@ -8,6 +8,7 @@ class CommandLine
 	public var version:Int;
 	public var output:Null<String>;
 	public var featureLevel:Int;
+	public var arch:String;
 
 	public function new(name:String)
 	{
@@ -37,6 +38,10 @@ class CommandLine
 				this.output = args[arg++];
 				if (output == null)
 					throw Error.BadFormat("--out", null);
+			case "--arch":
+				this.arch = args[arg++];
+				if (arch == null)
+					throw Error.BadFormat("--arch", null);
 			default:
 				throw Error.UnknownOption(args[arg - 1]);
 			}
@@ -50,7 +55,8 @@ class CommandLine
 		' Options :\n' +
 		'  --haxe-version <version> : sets what baseline haxe version was it compiled with\n' +
 		'  --feature-level <level> : sets the feature level needed to compile the buildFile. Defaults to 0\n' +
-		'  --out <filename> : sets the output file path\n';
+		'  --out <filename> : sets the output file path\n' +
+		'  --arch <architecture> : sets the output architecture';
 	}
 
 }
