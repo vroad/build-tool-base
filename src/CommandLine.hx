@@ -9,11 +9,13 @@ class CommandLine
 	public var output:Null<String>;
 	public var featureLevel:Int;
 	public var arch:String;
+	public var unsafe:Bool;
 
 	public function new(name:String)
 	{
 		this.name = name;
 		this.featureLevel = 0;
+		this.unsafe = false;
 	}
 
 	public function process(args:Array<String>, arg:Int = 0)
@@ -42,6 +44,8 @@ class CommandLine
 				this.arch = args[arg++];
 				if (arch == null)
 					throw Error.BadFormat("--arch", null);
+			case "--unsafe":
+				this.unsafe = true;
 			default:
 				throw Error.UnknownOption(args[arg - 1]);
 			}
@@ -56,7 +60,8 @@ class CommandLine
 		'  --haxe-version <version> : sets what baseline haxe version was it compiled with\n' +
 		'  --feature-level <level> : sets the feature level needed to compile the buildFile. Defaults to 0\n' +
 		'  --out <filename> : sets the output file path\n' +
-		'  --arch <architecture> : sets the output architecture';
+		'  --arch <architecture> : sets the output architecture\n' +
+		'  --unsafe : enable unsafe code';
 	}
 
 }
