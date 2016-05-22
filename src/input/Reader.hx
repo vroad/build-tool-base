@@ -65,6 +65,12 @@ class Reader
 			{
 				ret.libs.push(line.rtrim());
 			}
+		case "native_libs":
+			var line;
+			while ( (line = getLine()) != null)
+			{
+				ret.nativeLibs.push(line.rtrim());
+			}
 		case "modules":
 			var line, lastPath = null, lastArr:Array<ModuleType> = null;
 			while ( (line = getLine()) != null)
@@ -89,6 +95,18 @@ class Reader
 			while ( (line = getLine()) != null)
 			{
 				ret.resources.push(line.ltrim());
+			}
+		case "android_resources":
+			var line;
+			while ( (line = getLine()) != null)
+			{
+				ret.androidResources.push(line.ltrim());
+			}
+		case "android_assets":
+			var line;
+			while ( (line = getLine()) != null)
+			{
+				ret.androidAssets.push(line.ltrim());
 			}
 		case "main":
 			ret.main = getLine();
@@ -119,7 +137,10 @@ class Reader
 			modules: [],
 			main: null,
 			resources: [],
+			androidResources: [],
+			androidAssets: [],
 			libs: [],
+			nativeLibs: [],
 			opts: []
 		};
 

@@ -14,6 +14,9 @@ typedef Data =
 	var modules:Array<{ path:String, types:Array<ModuleType> }>;
 	var main:Null<String>;
 	var resources:Array<String>;
+	var androidResources:Array<String>;
+	var androidAssets:Array<String>;
 	var libs:Array<String>;
+	var nativeLibs:Array<String>;
 	var opts:Array<String>;
 }
