@@ -96,6 +96,12 @@ class Reader
 			{
 				ret.resources.push(line.ltrim());
 			}
+		case "android_abis":
+			var line;
+			while ( (line = getLine()) != null)
+			{
+				ret.androidABIs.push(line.ltrim());
+			}
 		case "android_resources":
 			var line;
 			while ( (line = getLine()) != null)
@@ -137,6 +143,7 @@ class Reader
 			modules: [],
 			main: null,
 			resources: [],
+			androidABIs: [],
 			androidResources: [],
 			androidAssets: [],
 			libs: [],
