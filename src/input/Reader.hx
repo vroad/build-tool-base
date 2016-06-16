@@ -125,6 +125,10 @@ class Reader
 			{
 				ret.opts.push(line);
 			}
+		case "guid":
+			var line;
+			if ( (line = getLine()) != null )
+				ret.guid = line;
 		case unk:
 			var toolName = cmd.name;
 			Sys.stderr().writeString('WARNING: The option $unk was passed to the build tool and wasn\'t recognized. It is recommended that you update the $toolName tool\n');
@@ -148,7 +152,8 @@ class Reader
 			androidAssets: [],
 			libs: [],
 			nativeLibs: [],
-			opts: []
+			opts: [],
+			guid: null
 		};
 
 		var i = i;

@@ -20,4 +20,5 @@ typedef Data =
 	var libs:Array<String>;
 	var nativeLibs:Array<String>;
 	var opts:Array<String>;
+	var guid:String;
 }
